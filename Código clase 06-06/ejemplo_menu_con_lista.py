@@ -50,3 +50,4 @@ while mostrarMenu:
         print("Ingrese una opción válida (1, 2, 3 o 4)")
 
 print("Personas registradas:", listaPersonas)
+print("Muchas gracias por usar este programa c:")
