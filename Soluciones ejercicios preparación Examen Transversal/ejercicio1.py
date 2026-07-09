@@ -13,55 +13,105 @@ evaluacion = {
 
 # Pide un número entero
 def leer_entero(mensaje_solicitud, mensaje_error):
-  return
+  while True:
+    try:
+      numero = int(input(mensaje_solicitud))
+      return numero
+    except ValueError:
+      print(mensaje_error)
 
 # Pide opción al usuario
 def leer_opcion():
-  return
+  opcion = leer_entero("Ingrese una opción: ", "La opción debe ser un número entero.")
+  if 1 <= opcion <= 6:
+    return opcion
+  else:
+    print("La opción debe ser un número entre 1 y 6")
+    return -1
 
 # Muestra el total de días de atraso de una asignatura
 def mostrar_dias_atraso(asignatura):
-  return
+  total_dias_atraso = 0
+  for codigo in entregas:
+    entrega = entregas[codigo]
+    if entrega[1].lower() == asignatura.lower():
+      evaluacion_entrega = evaluacion[codigo]
+      total_dias_atraso += evaluacion_entrega[1]
+  print("Total de días de atrasa para la asignatura", asignatura, ":", total_dias_atraso)
+
 
 # Muestra las entregas que tengan un puntaje entre el min y el max ingresado
 def buscar_por_rango_puntajes(puntaje_min, puntaje_max):
-  return
+  entregas_en_rango = []
+  for codigo in evaluacion:
+    evaluacion_entrega = evaluacion[codigo]
+    if puntaje_min <= evaluacion_entrega[0] <= puntaje_max:
+      entrega = entregas[codigo]
+      entregas_en_rango.append(f"{entrega[0]}--{codigo}")
+  entregas_en_rango.sort()
+  for entrega in entregas_en_rango:
+    print(entrega)
 
 # Verificar si la entrega con el código ingresado existe
 def buscar_por_codigo(codigo):
-  return
+  if codigo in entregas:
+    return True
+  else:
+    return False
 
 # Actualiza los días de atraso de la entrega con el código ingresado
 def actualizar_dias_atraso(codigo, dias_atraso_nuevos):
-  return
+  evaluacion_entrega = evaluacion[codigo]
+  evaluacion_entrega[1] = dias_atraso_nuevos
 
 # Crea una entrega
 def crear_entrega(codigo, titulo, asignatura, alumno, tipo, es_grupal, profesor, puntaje_maximo, dias_atraso):
-  return
+  es_grupal_boolean = False
+  if es_grupal.lower() == 's':
+    es_grupal_boolean = True
+  entregas[codigo] = [titulo, asignatura.lower(), alumno, tipo.upper(), es_grupal_boolean, profesor]
+  evaluacion[codigo] = [puntaje_maximo, dias_atraso]
 
 # Elimina una entrega por código
 def eliminar_por_codigo(codigo):
-  return
+  del entregas[codigo]
+  del evaluacion[codigo]
 
 # Texto no vacío ni solo espacios
 def validar_texto(texto):
-  return
+  if len(texto.strip()) > 0:
+    return True
+  else:
+    return False
 
 # Tipo debe ser P, T o E
 def validar_tipo(tipo):
-  return
+  # if tipo.upper() == "P" or tipo.upper() == "T" or tipo.upper() == "E":
+  if tipo.upper() in ["P", "T", "E"]:
+    return True
+  else:
+    return False
 
 # es_grupo debe ser s o n
 def validar_es_grupo(es_grupo):
-  return
+  if es_grupo.lower() == "s" or es_grupo.lower() == "n":
+    return True
+  else:
+    return False
 
 # Debe ser mayor a 0
 def validar_nota_max(nota_max):
-  return
+  if nota_max > 0:
+    return True
+  else:
+    return False
 
 # Debe ser igual o mayor a 0
 def validar_dias_atraso(dias_atraso):
-  return
+  if dias_atraso >= 0:
+    return True
+  else:
+    return False
 
 mostrar_menu = True
 
